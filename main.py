@@ -1,5 +1,6 @@
 import sys
 import thesportsdb
+import requests
 
 def display_menu():
     print("==============================")
@@ -14,22 +15,25 @@ def display_menu():
     print("7. Wyjście")
     print("==============================")
 
-while True:
-    display_menu()
-    option = input("Wybierz opcję: ")
-    if option == "7":
-        sys.exit(0)
-    elif option == "1":
-        print("Informacje o ligach")
-    elif option == "2":
-        print("Statystyki")
-    elif option == "3":
-        print("Aktualności")
-    elif option == "4":
-        print("Ciekawostki")
-    elif option == "5":
-        print("Quizy piłkarskie")
-    elif option == "6":
-        print("Ulubione drużyny")
-    else:
-        print("Nieprawidłowa opcja")
+# while True:
+#     display_menu()
+#     option = input("Wybierz opcję: ")
+#     if option == "7":
+#         sys.exit(0)
+#     elif option == "1":
+#         print("Informacje o ligach")
+#     elif option == "2":
+#         print("Statystyki")
+#     elif option == "3":
+#         print("Aktualności")
+#     elif option == "4":
+#         print("Ciekawostki")
+#     elif option == "5":
+#         print("Quizy piłkarskie")
+#     elif option == "6":
+#         print("Ulubione drużyny")
+#     else:
+#         print("Nieprawidłowa opcja")
+
+
+
