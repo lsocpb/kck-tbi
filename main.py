@@ -1,11 +1,12 @@
 import sys
 import curses
 from football_leagues import get_top_european_leagues
+import matches
 
 def display_menu(stdscr, selected_row):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
-    menu = ["Informacje o ligach", "Statystyki", "Aktualności", "Ciekawostki", "Quizy piłkarskie", "Ulubione drużyny", "Wyjście"]
+    menu = ["Informacje o ligach", "Mecze", "Aktualności", "Ciekawostki", "Quizy piłkarskie", "Ulubione drużyny", "Wyjście"]
 
     for i, option in enumerate(menu):
         x = w // 2 - len(option) // 2
@@ -27,7 +28,6 @@ def main(stdscr):
     while True:
         display_menu(stdscr, selected_row)
         key = stdscr.getch()
-
         if key == curses.KEY_DOWN and selected_row < 6:
             selected_row += 1
         elif key == curses.KEY_UP and selected_row > 0:
@@ -36,11 +36,12 @@ def main(stdscr):
             if selected_row == 6:
                 sys.exit(0)
             elif selected_row == 0:
-                get_top_european_leagues()
+                get_top_european_leagues(stdscr)
             elif selected_row == 1:
-                print("Statystyki")
+                active_matches = matches.get_active_matches()
+                matches.display_matches(stdscr, active_matches)
             elif selected_row == 2:
-                print("Aktualności")
+                print("Mecze")
             elif selected_row == 3:
                 print("Ciekawostki")
             elif selected_row == 4:

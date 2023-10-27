@@ -1,4 +1,5 @@
-# Przykładowe informacje o 5 najlepszych ligach europejskich.
+import curses
+
 top_european_leagues_info = [
     {
         "Nazwa ligi": "English Premier League",
@@ -37,24 +38,48 @@ top_european_leagues_info = [
     },
 ]
 
-def display_league_info(league_info):
-    for key, value in league_info.items():
-        print(f"{key}: {value}")
-    print("==============================")
 
-def get_top_european_leagues():
-    print("Dostępne ligi:")
-    for index, league_info in enumerate(top_european_leagues_info, start=1):
-        print(f"{index}. {league_info['Nazwa ligi']}")
-
+def get_top_european_leagues(stdscr):
+    selected_row = 0
     while True:
-        try:
-            wybor_ligi = int(input("Wybierz ligę (1-5): "))
-            if 1 <= wybor_ligi <= 5:
-                chosen_league = top_european_leagues_info[wybor_ligi - 1]
-                display_league_info(chosen_league)
-                break
+        stdscr.clear()
+        h, w = stdscr.getmaxyx()
+        
+        # Wyświetl dostępne ligi
+        for index, league_info in enumerate(top_european_leagues_info, start=1):
+            x = w // 2 - len(league_info['Nazwa ligi']) // 2
+            y = h // 2 - len(top_european_leagues_info) // 2 + index - 1
+            if index - 1 == selected_row:
+                stdscr.attron(curses.color_pair(1))
+                stdscr.addstr(y, x, league_info['Nazwa ligi'])
+                stdscr.attroff(curses.color_pair(1))
             else:
-                print("Niepoprawny wybór ligi. Wybierz liczbę od 1 do 5.")
-        except ValueError:
-            print("Niepoprawny wybór ligi. Wybierz liczbę od 1 do 5.")
+                stdscr.addstr(y, x, league_info['Nazwa ligi'])
+        
+        stdscr.refresh()
+        
+        key = stdscr.getch()
+        if key == curses.KEY_DOWN and selected_row < len(top_european_leagues_info) - 1:
+            selected_row += 1
+        elif key == curses.KEY_UP and selected_row > 0:
+            selected_row -= 1
+        elif key == 10:  # Enter key
+            chosen_league = top_european_leagues_info[selected_row]
+            display_league_info(stdscr, chosen_league)
+            stdscr.getch()  # Oczekiwanie na naciśnięcie klawisza przed powrotem do menu
+        elif key == 27:  # Escape key
+            break
+
+def display_league_info(stdscr, league_info):
+    stdscr.clear()
+    h, w = stdscr.getmaxyx()
+    
+    y = h // 2 - len(league_info) // 2
+    x = w // 2 - max(len(key) for key in league_info) // 2
+
+    for key, value in league_info.items():
+        stdscr.addstr(y, x, f"{key}: {value}")
+        y += 1
+    
+    stdscr.refresh()
+    stdscr.getch()
