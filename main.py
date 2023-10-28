@@ -2,7 +2,7 @@ import sys
 import curses
 from football_leagues import get_top_european_leagues
 import matches
-from news import get_news
+from news import get_selected_news
 def display_menu(stdscr, selected_row):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
@@ -41,7 +41,7 @@ def main(stdscr):
                 active_matches = matches.get_active_matches()
                 matches.display_matches(stdscr, active_matches)
             elif selected_row == 2:
-                get_news(stdscr)
+                get_selected_news(stdscr)
             elif selected_row == 3:
                 print("Ciekawostki")
             elif selected_row == 4:
