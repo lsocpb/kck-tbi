@@ -11,7 +11,7 @@ def load_quiz_from_file(file_path):
 # Piliki json z pytaniami i odpowiedziami do quizow
 general_quiz_file = "data/general_quiz.json"
 specialized_quiz_file = "data/specialized_quiz.json"
-
+quiz_results = [] # Lista z wynikami quizow
 general_quiz_questions = load_quiz_from_file(general_quiz_file)
 specialized_quiz_questions = load_quiz_from_file(specialized_quiz_file)
 
@@ -50,6 +50,10 @@ def run_quiz(stdscr, quiz_name, quiz_questions):
             if selected_answer == correct_answer:
                 score += 1
             selected_question += 1
+    
+    quiz_results.append({"nazwa": quiz_name, "wynik": score})
+    with open("data/quiz_results.json", "w") as result_file:
+        json.dump(quiz_results, result_file)
 
     # Wyświetl wynik
     stdscr.clear()
@@ -62,7 +66,7 @@ def select_quiz(stdscr):
     curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
     current_row = 0
-    menu = ["1. Quiz Ogólny", "2. Quiz Specjalistyczny", "3. Powrót do menu głównego"]
+    menu = ["1. Quiz Ogólny", "2. Quiz Specjalistyczny", "3. Ostatnie Wyniki Quizów", "4. Powrót do menu głównego"]
     selected_quiz = None
 
     while True:
@@ -92,9 +96,33 @@ def select_quiz(stdscr):
             elif current_row == 1:
                 run_specialized_quiz(stdscr)
             elif current_row == 2:
+                display_quiz_results(stdscr)
+            elif current_row == 3:
                 break
         elif key == 27: 
             break
+
+def display_quiz_results(stdscr):
+    stdscr.clear()
+    h, w = stdscr.getmaxyx()
+    stdscr.addstr(2, 2, "Ostatnie 5 wyników quizów:")
+
+    for i, result in enumerate(quiz_results):
+        stdscr.addstr(4 + i, 4, f"{result['nazwa']}: {result['wynik']}/5")
+
+    stdscr.addstr(h - 2, 2, "Naciśnij klawisz 'Enter' aby powrócić do menu głównego")
+    stdscr.refresh()
+
+    while True:
+        key = stdscr.getch()
+        if key == 10:
+            break
+
+try:
+    with open("data/quiz_results.json", "r") as result_file:
+        quiz_results = json.load(result_file)
+except FileNotFoundError:
+    quiz_results = []
 
 
 if __name__ == "__main__":
