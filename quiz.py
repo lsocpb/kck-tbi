@@ -1,6 +1,6 @@
 import curses
 import json
-
+import random
 def load_quiz_from_file(file_path):
     try:
         with open(file_path, "r") as file:
@@ -8,21 +8,20 @@ def load_quiz_from_file(file_path):
     except FileNotFoundError:
         return []
 
-# Ścieżki do plików JSON z pytaniami i odpowiedziami
+# Piliki json z pytaniami i odpowiedziami do quizow
 general_quiz_file = "data/general_quiz.json"
 specialized_quiz_file = "data/specialized_quiz.json"
 
-# Wczytanie pytań i odpowiedzi z plików JSON
 general_quiz_questions = load_quiz_from_file(general_quiz_file)
 specialized_quiz_questions = load_quiz_from_file(specialized_quiz_file)
 
-# Funkcja uruchamiająca quiz ogólny
 def run_general_quiz(stdscr):
-    run_quiz(stdscr, "Quiz Ogólny", general_quiz_questions)
+    random_questions = random.sample(general_quiz_questions, 5)
+    run_quiz(stdscr, "Quiz Ogólny", random_questions)
 
-# Funkcja uruchamiająca quiz specjalistyczny
 def run_specialized_quiz(stdscr):
-    run_quiz(stdscr, "Quiz Specjalistyczny", specialized_quiz_questions)
+    random_questions = random.sample(specialized_quiz_questions, 5)
+    run_quiz(stdscr, "Quiz Specjalistyczny", random_questions)
 
 # Funkcja ogólna do uruchamiania quizów
 def run_quiz(stdscr, quiz_name, quiz_questions):
@@ -33,17 +32,17 @@ def run_quiz(stdscr, quiz_name, quiz_questions):
         stdscr.clear()
         h, w = stdscr.getmaxyx()
 
-        # Wyświetl pytanie
+        # Wyswietlamy pytanie
         question = quiz_questions[selected_question]
         stdscr.addstr(2, 2, f"Pytanie {selected_question + 1}/{len(quiz_questions)} ({quiz_name}):")
         stdscr.addstr(4, 2, question["Pytanie"])
 
-        # Wyświetl opcje odpowiedzi
+        # Wyswietlamy odpowiedzi
         for i, answer in enumerate(question["Odpowiedzi"]):
             stdscr.addstr(6 + i, 4, answer)
 
         stdscr.refresh()
-
+        # Pobieramy odpowiedz od użytkownika
         key = stdscr.getch()
         if key == ord("A") or key == ord("a") or key == ord("B") or key == ord("b") or key == ord("C") or key == ord("c") or key == ord("D") or key == ord("d"):
             selected_answer = chr(key).upper()
@@ -56,11 +55,11 @@ def run_quiz(stdscr, quiz_name, quiz_questions):
     stdscr.clear()
     stdscr.addstr(h // 2, w // 2 - 10, f"Twój wynik ({quiz_name}): {score}/{len(quiz_questions)}", curses.A_BOLD)
     stdscr.refresh()
-    stdscr.getch()  # Czekaj na naciśnięcie klawisza przed powrotem do menu
+    stdscr.getch() 
 
 # Funkcja wybierająca quiz
 def select_quiz(stdscr):
-    curses.curs_set(0)  # Ukryj kursor
+    curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
     current_row = 0
     menu = ["1. Quiz Ogólny", "2. Quiz Specjalistyczny", "3. Powrót do menu głównego"]
@@ -87,14 +86,14 @@ def select_quiz(stdscr):
             current_row += 1
         elif key == curses.KEY_UP and current_row > 0:
             current_row -= 1
-        elif key == 10:  # Enter key
+        elif key == 10: 
             if current_row == 0:
                 run_general_quiz(stdscr)
             elif current_row == 1:
                 run_specialized_quiz(stdscr)
             elif current_row == 2:
                 break
-        elif key == 27:  # Escape key
+        elif key == 27: 
             break
 
 
