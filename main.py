@@ -3,6 +3,7 @@ import curses
 from football_leagues import get_top_european_leagues
 import matches
 from news import get_selected_news
+from quiz import select_quiz
 def display_menu(stdscr, selected_row):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
@@ -45,7 +46,7 @@ def main(stdscr):
             elif selected_row == 3:
                 print("Ciekawostki")
             elif selected_row == 4:
-                print("Quizy piłkarskie")
+                select_quiz(stdscr)
             elif selected_row == 5:
                 print("Ulubione drużyny")
 

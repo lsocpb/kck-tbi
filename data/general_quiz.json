@@ -1,0 +1,97 @@
+[
+    {
+        "Pytanie": "Kto jest uważany za najlepszego strzelca w historii piłki nożnej?",
+        "Odpowiedzi": ["A. Lionel Messi", "B. Cristiano Ronaldo", "C. Pelé", "D. Diego Maradona"],
+        "Poprawna odpowiedź": "C"
+    },
+    {
+        "Pytanie": "W którym kraju odbyła się pierwsza edycja Mistrzostw Świata w piłce nożnej?",
+        "Odpowiedzi": ["A. Brazylia", "B. Niemcy", "C. Urugwaj", "D. Włochy"],
+        "Poprawna odpowiedź": "C"
+    },
+    {
+        "Pytanie": "Ile zawodników drużyny bierze udział w meczu piłki nożnej?",
+        "Odpowiedzi": ["A. 7", "B. 11", "C. 9", "D. 10"],
+        "Poprawna odpowiedź": "B"
+    },
+    {
+        "Pytanie": "Kto zdobył Złotą Piłkę w 2021 roku?",
+        "Odpowiedzi": ["A. Neymar", "B. Lionel Messi", "C. Robert Lewandowski", "D. Cristiano Ronaldo"],
+        "Poprawna odpowiedź": "B"
+    },
+    {
+        "Pytanie": "Który klub jest znany jako 'Królewski Klub'?",
+        "Odpowiedzi": ["A. FC Barcelona", "B. Manchester United", "C. Real Madrid", "D. Bayern Monachium"],
+        "Poprawna odpowiedź": "C"
+    },
+    {
+        "Pytanie": "Która drużyna wygrała najwięcej Mistrzostw Świata w piłce nożnej?",
+        "Odpowiedzi": ["A. Brazylia", "B. Niemcy", "C. Włochy", "D. Argentyna"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
+        "Pytanie": "Ile czasu trwa jedna połowa meczu piłki nożnej?",
+        "Odpowiedzi": ["A. 45 minut", "B. 30 minut", "C. 60 minut", "D. 90 minut"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
+        "Pytanie": "Który stadion jest największy na świecie pod względem pojemności?",
+        "Odpowiedzi": ["A. Camp Nou", "B. Wembley", "C. Maracanã", "D. Azteca"],
+        "Poprawna odpowiedź": "D"
+    },
+    {
+        "Pytanie": "Kto jest autorem książki 'Kto odbierze mi piłkę'?",
+        "Odpowiedzi": ["A. Andrzej Gołota", "B. Wisława Szymborska", "C. Zbigniew Boniek", "D. Andrzej Iwan"],
+        "Poprawna odpowiedź": "D"
+    },
+    {
+        "Pytanie": "Który piłkarz jest znany jako 'Bosman'?",
+        "Odpowiedzi": ["A. Jean-Marc Bosman", "B. Johan Bosman", "C. Giorgio Bosman", "D. Cristiano Bosman"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
+        "Pytanie": "Ile zawodników ma drużyna w piłce ręcznej na boisku podczas meczu?",
+        "Odpowiedzi": ["A. 7", "B. 11", "C. 6", "D. 9"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
+        "Pytanie": "Kto zdobył najwięcej bramek w jednym sezonie La Liga?",
+        "Odpowiedzi": ["A. Lionel Messi", "B. Cristiano Ronaldo", "C. Hugo Sánchez", "D. Raúl"],
+        "Poprawna odpowiedź": "C"
+    },
+    {
+        "Pytanie": "Która drużyna wygrała najwięcej Pucharów Europy (obecnie Liga Mistrzów)?",
+        "Odpowiedzi": ["A. FC Barcelona", "B. Real Madrid", "C. Bayern Monachium", "D. AC Milan"],
+        "Poprawna odpowiedź": "B"
+    },
+    {
+        "Pytanie": "Kto jest autorem słynnego zdania 'The ball is round'?",
+        "Odpowiedzi": ["A. Albert Einstein", "B. Nelson Mandela", "C. Karl Marx", "D. Józef Piłsudski"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
+        "Pytanie": "Który klub jest znany jako 'Kanonierzy'?",
+        "Odpowiedzi": ["A. Manchester United", "B. FC Barcelona", "C. Arsenal", "D. Liverpool"],
+        "Poprawna odpowiedź": "C"
+    },
+    {
+        "Pytanie": "Który zawodnik jest uważany za 'Króla Futbolu'?",
+        "Odpowiedzi": ["A. Zinedine Zidane", "B. Diego Maradona", "C. Lionel Messi", "D. Cristiano Ronaldo"],
+        "Poprawna odpowiedź": "B"
+    },
+    {
+        "Pytanie": "Która drużyna jest znana jako 'Orły'?",
+        "Odpowiedzi": ["A. FC Barcelona", "B. Eintracht Frankfurt", "C. Manchester United", "D. Bayern Monachium"],
+        "Poprawna odpowiedź": "B"
+    },
+    {
+        "Pytanie": "Który klub jest znany jako 'Koguty'?",
+        "Odpowiedzi": ["A. Chelsea", "B. Liverpool", "C. AS Roma", "D. Borussia Dortmund"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
+        "Pytanie": "Który piłkarz jest autorem rekordowej liczby strzelonych bramek w jednym sezonie Premier League?",
+        "Odpowiedzi": ["A. Alan Shearer", "B. Thierry Henry", "C. Cristiano Ronaldo", "D. Andy Cole"],
+        "Poprawna odpowiedź": "C"
+    }
+]

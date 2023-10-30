@@ -1,0 +1,82 @@
+[
+    {
+        "Pytanie": "Który zawodnik jest uważany za króla strzelców w historii Mistrzostw Świata?",
+        "Odpowiedzi": ["A. Pelé", "B. Miroslav Klose", "C. Ronaldo", "D. Gerd Müller"],
+        "Poprawna odpowiedź": "B"
+    },
+    {
+        "Pytanie": "Która drużyna wygrała najwięcej edycji Copa America?",
+        "Odpowiedzi": ["A. Brazylia", "B. Argentyna", "C. Urugwaj", "D. Chile"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
+        "Pytanie": "Ile złotych butów za najlepszego strzelca sezonu zdobył Lionel Messi w swojej karierze?",
+        "Odpowiedzi": ["A. 4", "B. 5", "C. 6", "D. 7"],
+        "Poprawna odpowiedź": "B"
+    },
+    {
+        "Pytanie": "Który klub wygrał najwięcej edycji Ligi Mistrzów (Pucharu Europy)?",
+        "Odpowiedzi": ["A. FC Barcelona", "B. Real Madrid", "C. AC Milan", "D. Bayern Monachium"],
+        "Poprawna odpowiedź": "B"
+    },
+    {
+        "Pytanie": "W którym roku zdobyto pierwszą Mistrzostwo Świata w piłce nożnej dla kobiet?",
+        "Odpowiedzi": ["A. 1991", "B. 1995", "C. 1999", "D. 2003"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
+        "Pytanie": "Który piłkarz ustanowił rekord transferowy w historii piłki nożnej, przechodząc do Paris Saint-Germain?",
+        "Odpowiedzi": ["A. Lionel Messi", "B. Cristiano Ronaldo", "C. Neymar", "D. Kylian Mbappé"],
+        "Poprawna odpowiedź": "C"
+    },
+    {
+        "Pytanie": "Który bramkarz ma na koncie rekordową ilość czystych kont w historii Premier League?",
+        "Odpowiedzi": ["A. Petr Čech", "B. Alisson Becker", "C. David De Gea", "D. Thibaut Courtois"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
+        "Pytanie": "Ile razy Argentyna zdobyła Mistrzostwo Świata w piłce nożnej mężczyzn?",
+        "Odpowiedzi": ["A. 1", "B. 2", "C. 3", "D. 4"],
+        "Poprawna odpowiedź": "B"
+    },
+    {
+        "Pytanie": "Kto jest autorem słów 'Soccer is all about the love of the game'?",
+        "Odpowiedzi": ["A. Diego Maradona", "B. Pelé", "C. Thierry Henry", "D. Cristiano Ronaldo"],
+        "Poprawna odpowiedź": "B"
+    },
+    {
+        "Pytanie": "Który klub jest znany jako 'Kłos'?",
+        "Odpowiedzi": ["A. Borussia Dortmund", "B. AS Roma", "C. Napoli", "D. Eintracht Frankfurt"],
+        "Poprawna odpowiedź": "D"
+    },
+    {
+        "Pytanie": "Który piłkarz zdobył najwięcej Złotych Butów w historii?",
+        "Odpowiedzi": ["A. Lionel Messi", "B. Cristiano Ronaldo", "C. Gerd Müller", "D. Thierry Henry"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
+        "Pytanie": "W którym kraju odbyły się pierwsze Mistrzostwa Świata w piłce nożnej dla kobiet?",
+        "Odpowiedzi": ["A. Szwecja", "B. Norwegia", "C. USA", "D. Kanada"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
+        "Pytanie": "Który piłkarz jest znany jako 'Kubański Magik'?",
+        "Odpowiedzi": ["A. Andrés Iniesta", "B. Xavi Hernandez", "C. Hristo Stoichkov", "D. Romário"],
+        "Poprawna odpowiedź": "C"
+    },
+    {
+        "Pytanie": "Ile razy Francja zdobyła Mistrzostwo Świata w piłce nożnej mężczyzn?",
+        "Odpowiedzi": ["A. 1", "B. 2", "C. 3", "D. 4"],
+        "Poprawna odpowiedź": "C"
+    },
+    {
+        "Pytanie": "Który piłkarz zdobył najwięcej bramek w historii Mistrzostw Świata?",
+        "Odpowiedzi": ["A. Pelé", "B. Miroslav Klose", "C. Ronaldo", "D. Gerd Müller"],
+        "Poprawna odpowiedź": "B"
+    },
+    {
+        "Pytanie": "Który bramkarz został okrzyknięty 'Czarnym Pająkiem'?",
+        "Odpowiedzi": ["A. Lev Yashin", "B. Dino Zoff", "C. Gianluigi Buffon", "D. Iker Casillas"],
+        "Poprawna odpowiedź": "A"
+    },
+    {
