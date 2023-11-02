@@ -91,8 +91,22 @@ def login(stdscr):
     h, w = stdscr.getmaxyx()
     stdscr.addstr(h // 2 - 1, w // 2 - 7, "Logowanie", curses.A_BOLD)
     stdscr.addstr(h // 2, w // 2 - 10, "Podaj nazwę użytkownika:", curses.A_BOLD)
+    stdscr.addstr(h - 2, 4, "Nacisnij Escape aby powrócic do menu", curses.A_BOLD)
     stdscr.refresh()
-    username = stdscr.getstr(h // 2 + 1, w // 2 - 10, 20).decode("utf-8")
+    username = ""
+    curses.curs_set(1)
+    
+    while True:
+        key = stdscr.getch()
+        if key == 10:
+            break
+        elif key == 127:
+            username = username[:-1]
+        else:
+            username += chr(key)
+        stdscr.addstr(h // 2 + 1, w // 2 - 10, username)
+        stdscr.refresh()
+    curses.curs_set(0)    
 
     conn = sqlite3.connect("users.db")
     cursor = conn.cursor()
@@ -104,7 +118,21 @@ def login(stdscr):
         stored_username, stored_password = user_data
         stdscr.addstr(h // 2 + 2, w // 2 - 10, "Podaj hasło:", curses.A_BOLD)
         stdscr.refresh()
-        password = stdscr.getstr(h // 2 + 3, w // 2 - 10, 20).decode("utf-8")
+        password = ""
+        curses.curs_set(1)
+
+        while True:
+            key = stdscr.getch()
+            if key == 10:
+                break
+            elif key == 27:
+                return
+            elif key == 127:
+                password = password[:-1]
+            else:
+                password += chr(key)
+            stdscr.addstr(h // 2 + 3, w // 2 - 10, "*" * len(password))
+            stdscr.refresh()
 
         if password == stored_password:
             return username
@@ -124,8 +152,23 @@ def register(stdscr):
     h, w = stdscr.getmaxyx()
     stdscr.addstr(h // 2 - 1, w // 2 - 10, "Rejestracja", curses.A_BOLD)
     stdscr.addstr(h // 2, w // 2 - 13, "Podaj nazwę użytkownika:", curses.A_BOLD)
+    stdscr.addstr(h - 2, 4, "Nacisnij Escape aby powrócic do menu", curses.A_BOLD)
     stdscr.refresh()
-    username = stdscr.getstr(h // 2 + 1, w // 2 - 13, 20).decode("utf-8")
+    username = ""
+    curses.curs_set(1)
+
+    while True:
+        key = stdscr.getch()
+        if key == 10:
+            break
+        elif key == 27:
+            return
+        elif key == 127:
+            username = username[:-1]
+        else:
+            username += chr(key)
+        stdscr.addstr(h // 2 + 1, w // 2 - 10, username)
+        stdscr.refresh()
 
     conn = sqlite3.connect("users.db")
     cursor = conn.cursor()
@@ -141,7 +184,18 @@ def register(stdscr):
 
     stdscr.addstr(h // 2 + 2, w // 2 - 10, "Podaj hasło:", curses.A_BOLD)
     stdscr.refresh()
-    password = stdscr.getstr(h // 2 + 3, w // 2 - 10, 20).decode("utf-8")
+
+    password = ""
+    while True:
+        key = stdscr.getch()
+        if key == 10:
+            break
+        elif key == 127:
+            password = password[:-1]
+        else:
+            password += chr(key)
+        stdscr.addstr(h // 2 + 3, w // 2 - 10, "*" * len(password))
+        stdscr.refresh()
 
     # Dodaj nowego użytkownika do bazy danych
     cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, password))
