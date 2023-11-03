@@ -1,6 +1,7 @@
 import curses
 import json
 import random
+import sqlite3
 def load_quiz_from_file(file_path):
     try:
         with open(file_path, "r") as file:
@@ -11,20 +12,19 @@ def load_quiz_from_file(file_path):
 # Piliki json z pytaniami i odpowiedziami do quizow
 general_quiz_file = "data/general_quiz.json"
 specialized_quiz_file = "data/specialized_quiz.json"
-quiz_results = [] # Lista z wynikami quizow
 general_quiz_questions = load_quiz_from_file(general_quiz_file)
 specialized_quiz_questions = load_quiz_from_file(specialized_quiz_file)
 
-def run_general_quiz(stdscr):
+def run_general_quiz(stdscr, user_id):
     random_questions = random.sample(general_quiz_questions, 5)
-    run_quiz(stdscr, "Quiz Ogólny", random_questions)
+    run_quiz(stdscr, "Quiz Ogólny", random_questions, user_id)
 
-def run_specialized_quiz(stdscr):
+def run_specialized_quiz(stdscr, user_id):
     random_questions = random.sample(specialized_quiz_questions, 5)
-    run_quiz(stdscr, "Quiz Specjalistyczny", random_questions)
+    run_quiz(stdscr, "Quiz Specjalistyczny", random_questions, user_id)
 
 # Funkcja ogólna do uruchamiania quizów
-def run_quiz(stdscr, quiz_name, quiz_questions):
+def run_quiz(stdscr, quiz_name, quiz_questions, user_id):
     selected_question = 0
     score = 0
 
@@ -51,10 +51,15 @@ def run_quiz(stdscr, quiz_name, quiz_questions):
                 score += 1
             selected_question += 1
     
-    quiz_results.append({"nazwa": quiz_name, "wynik": score})
-    with open("data/quiz_results.json", "w") as result_file:
-        json.dump(quiz_results, result_file)
-
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
+    cursor.execute('SELECT id FROM users WHERE id = ?', (user_id,))
+    user = cursor.fetchone()
+    
+    if user is not None:
+        cursor.execute('INSERT INTO quiz_results (user_id, quiz_name, score) VALUES (?, ?, ?)', (user_id, quiz_name, score))
+        conn.commit()
+        conn.close()
     # Wyświetl wynik
     stdscr.clear()
     stdscr.addstr(h // 2, w // 2 - 10, f"Twój wynik ({quiz_name}): {score}/{len(quiz_questions)}", curses.A_BOLD)
@@ -62,7 +67,7 @@ def run_quiz(stdscr, quiz_name, quiz_questions):
     stdscr.getch() 
 
 # Funkcja wybierająca quiz
-def select_quiz(stdscr):
+def select_quiz(stdscr, user_id):
     curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
     current_row = 0
@@ -92,23 +97,29 @@ def select_quiz(stdscr):
             current_row -= 1
         elif key == 10: 
             if current_row == 0:
-                run_general_quiz(stdscr)
+                run_general_quiz(stdscr, user_id)
             elif current_row == 1:
-                run_specialized_quiz(stdscr)
+                run_specialized_quiz(stdscr, user_id)
             elif current_row == 2:
-                display_quiz_results(stdscr)
+                display_quiz_results(stdscr, user_id)
             elif current_row == 3:
                 break
         elif key == 27: 
             break
 
-def display_quiz_results(stdscr):
+def display_quiz_results(stdscr, user_id):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
     stdscr.addstr(2, 2, "Ostatnie 5 wyników quizów:")
 
+    with sqlite3.connect("users.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute('SELECT quiz_name, score FROM quiz_results WHERE user_id = ? ORDER BY id DESC LIMIT 5', (user_id,))
+        quiz_results = cursor.fetchall()
+
     for i, result in enumerate(quiz_results):
-        stdscr.addstr(4 + i, 4, f"{result['nazwa']}: {result['wynik']}/5")
+        quiz_name, score = result
+        stdscr.addstr(4 + i, 4, f"{quiz_name}: {score}/5")
 
     stdscr.addstr(h - 2, 2, "Naciśnij klawisz 'Enter' aby powrócić do menu głównego")
     stdscr.refresh()
@@ -118,11 +129,6 @@ def display_quiz_results(stdscr):
         if key == 10:
             break
 
-try:
-    with open("data/quiz_results.json", "r") as result_file:
-        quiz_results = json.load(result_file)
-except FileNotFoundError:
-    quiz_results = []
 
 
 if __name__ == "__main__":

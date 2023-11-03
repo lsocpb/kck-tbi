@@ -24,6 +24,7 @@ def display_menu(stdscr, selected_row):
 
 def main(stdscr):
     init_database()
+    user_id = None
     curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
     selected_row = 0
@@ -66,7 +67,7 @@ def main(stdscr):
             elif selected_row == 3:
                 print("Ciekawostki")
             elif selected_row == 4:
-                select_quiz(stdscr)
+                select_quiz(stdscr, user_id)
             elif selected_row == 5:
                 print("Ulubione drużyny")
 
@@ -218,6 +219,15 @@ def init_database():
         )
     ''')
 
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS quiz_results (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            quiz_name TEXT NOT NULL,
+            score INTEGER NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES users (id)
+        )
+    ''')
     c.execute('''
         INSERT OR IGNORE INTO users (username, password)
         VALUES (?, ?)
