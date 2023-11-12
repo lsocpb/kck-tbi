@@ -39,8 +39,8 @@ def main(stdscr):
             selected_row_login -= 1
         elif key == 10:  # Enter key
             if selected_row_login == 0:
-                logged_user = login(stdscr)
-                if logged_user is not None:
+                user_id = login(stdscr)
+                if user_id is not None:
                     break
             elif selected_row_login == 1:
                 register(stdscr)
@@ -111,12 +111,12 @@ def login(stdscr):
 
     conn = sqlite3.connect("users.db")
     cursor = conn.cursor()
-    cursor.execute('SELECT username, password FROM users WHERE username = ?', (username,))
+    cursor.execute('SELECT username, password, id FROM users WHERE username = ?', (username,))
     user_data = cursor.fetchone()
     conn.close()
 
     if user_data is not None:
-        stored_username, stored_password = user_data
+        stored_username, stored_password, id = user_data
         stdscr.addstr(h // 2 + 2, w // 2 - 10, "Podaj hasło:", curses.A_BOLD)
         stdscr.refresh()
         password = ""
@@ -136,7 +136,7 @@ def login(stdscr):
             stdscr.refresh()
 
         if password == stored_password:
-            return username
+            return id
 
         else:
             stdscr.addstr(h // 2 + 2, w // 2 - 10, "Nieprawidłowe hasło.", curses.A_BOLD)

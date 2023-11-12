@@ -59,12 +59,13 @@ def run_quiz(stdscr, quiz_name, quiz_questions, user_id):
     if user is not None:
         cursor.execute('INSERT INTO quiz_results (user_id, quiz_name, score) VALUES (?, ?, ?)', (user_id, quiz_name, score))
         conn.commit()
-        conn.close()
+    conn.close()
+
     # Wyświetl wynik
     stdscr.clear()
     stdscr.addstr(h // 2, w // 2 - 10, f"Twój wynik ({quiz_name}): {score}/{len(quiz_questions)}", curses.A_BOLD)
     stdscr.refresh()
-    stdscr.getch() 
+    stdscr.getch()
 
 # Funkcja wybierająca quiz
 def select_quiz(stdscr, user_id):
@@ -132,4 +133,6 @@ def display_quiz_results(stdscr, user_id):
 
 
 if __name__ == "__main__":
-    curses.wrapper(select_quiz)
+    id = None
+    curses.wrapper(lambda stdscr: select_quiz(stdscr, id))
+
