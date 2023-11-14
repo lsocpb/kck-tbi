@@ -6,6 +6,7 @@ from news import get_selected_news
 from quiz import select_quiz
 from fav_teams import handle_favorite_teams, get_current_favorite_team
 import sqlite3
+import bcrypt
 def display_menu(stdscr, selected_row):
     curses.curs_set(0)
     stdscr.clear()
@@ -48,7 +49,6 @@ def main(stdscr):
                 register(stdscr)
             elif selected_row_login == 2:
                 sys.exit(0)
-    current_favorite_team = get_current_favorite_team(user_id)
     
     while True:
         display_menu(stdscr, selected_row)
@@ -72,7 +72,7 @@ def main(stdscr):
             elif selected_row == 4:
                 select_quiz(stdscr, user_id)
             elif selected_row == 5:
-                handle_favorite_teams(stdscr, user_id, current_favorite_team)
+                handle_favorite_teams(stdscr, user_id)
 
 def initial_screen(stdscr, selected_row):
     stdscr.clear()
@@ -138,9 +138,8 @@ def login(stdscr):
             stdscr.addstr(h // 2 + 3, w // 2 - 10, "*" * len(password))
             stdscr.refresh()
 
-        if password == stored_password:
+        if bcrypt.checkpw(password.encode('utf-8'), stored_password):
             return id
-
         else:
             stdscr.addstr(h // 2 + 2, w // 2 - 10, "Nieprawidłowe hasło.", curses.A_BOLD)
             stdscr.refresh()
@@ -200,9 +199,11 @@ def register(stdscr):
             password += chr(key)
         stdscr.addstr(h // 2 + 3, w // 2 - 10, "*" * len(password))
         stdscr.refresh()
+        salt = bcrypt.gensalt(rounds=15)
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
 
-    # Dodaj nowego użytkownika do bazy danych
-    cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, password))
+
+    cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
     conn.commit()
     conn.close()
 
