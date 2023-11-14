@@ -7,6 +7,7 @@ from quiz import select_quiz
 from fav_teams import handle_favorite_teams, get_current_favorite_team
 import sqlite3
 def display_menu(stdscr, selected_row):
+    curses.curs_set(0)
     stdscr.clear()
     h, w = stdscr.getmaxyx()
     menu = ["Informacje o ligach", "Mecze", "Aktualności", "Ciekawostki", "Quizy piłkarskie", "Ulubione drużyny", "Wyjście"]

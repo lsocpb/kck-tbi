@@ -2,11 +2,16 @@ import curses
 import sqlite3
 
 def handle_favorite_teams(stdscr, user_id, current_favorite_team):
+    curses.curs_set(0)
     selected_row_favorite_teams = 0
-    while True:
-        display_favorite_teams_menu(stdscr, selected_row_favorite_teams, current_favorite_team)
-        key = stdscr.getch()
 
+    def update_screen():
+        nonlocal current_favorite_team
+        current_favorite_team = get_current_favorite_team(user_id)
+
+    while True:
+        display_favorite_teams_menu(stdscr, selected_row_favorite_teams, current_favorite_team, update_screen)
+        key = stdscr.getch()
         if key == curses.KEY_DOWN and selected_row_favorite_teams < 3:
             selected_row_favorite_teams += 1
         elif key == curses.KEY_UP and selected_row_favorite_teams > 0:
@@ -21,18 +26,17 @@ def handle_favorite_teams(stdscr, user_id, current_favorite_team):
             elif selected_row_favorite_teams == 3:
                 break
 
-def display_favorite_teams_menu(stdscr, selected_row, current_favorite_team):
+def display_favorite_teams_menu(stdscr, selected_row, current_favorite_team, callback=None):
+    curses.curs_set(0)
     stdscr.clear()
     h, w = stdscr.getmaxyx()
-    
+
     stdscr.attron(curses.color_pair(1))
     stdscr.addstr(h // 2 - 4, w // 2 - len("TWOJA ULUBIONA DRUŻYNA: {}".format(current_favorite_team)) // 2,
                   "TWOJA ULUBIONA DRUŻYNA: {}".format(current_favorite_team))
     stdscr.attroff(curses.color_pair(1))
-    
-    
-    menu = ["Wybierz ulubioną drużynę", "Sprawdź ostatnie wyniki", "Sprawdź aktualny skład", "Powrót"]
 
+    menu = ["Wybierz ulubioną drużynę", "Sprawdź ostatnie wyniki", "Sprawdź aktualny skład", "Powrót"]
 
     for i, option in enumerate(menu):
         x = w // 2 - len(option) // 2
@@ -46,8 +50,12 @@ def display_favorite_teams_menu(stdscr, selected_row, current_favorite_team):
 
     stdscr.refresh()
 
+    if callback is not None:
+        callback()  # Wywołujemy funkcję zwrotną do aktualizacji ekranu
+
 
 def select_favorite_team(stdscr, user_id):
+    curses.curs_set(0)
     stdscr.clear()
     h, w = stdscr.getmaxyx()
     
