@@ -4,7 +4,7 @@ from football_leagues import get_top_european_leagues
 import matches
 from news import get_selected_news
 from quiz import select_quiz
-from fav_teams import handle_favorite_teams
+from fav_teams import handle_favorite_teams, get_current_favorite_team
 import sqlite3
 def display_menu(stdscr, selected_row):
     stdscr.clear()
@@ -47,6 +47,7 @@ def main(stdscr):
                 register(stdscr)
             elif selected_row_login == 2:
                 sys.exit(0)
+    current_favorite_team = get_current_favorite_team(user_id)
     
     while True:
         display_menu(stdscr, selected_row)
@@ -70,7 +71,7 @@ def main(stdscr):
             elif selected_row == 4:
                 select_quiz(stdscr, user_id)
             elif selected_row == 5:
-                handle_favorite_teams(stdscr, user_id)
+                handle_favorite_teams(stdscr, user_id, current_favorite_team)
 
 def initial_screen(stdscr, selected_row):
     stdscr.clear()
