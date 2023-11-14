@@ -4,6 +4,7 @@ from football_leagues import get_top_european_leagues
 import matches
 from news import get_selected_news
 from quiz import select_quiz
+from fav_teams import handle_favorite_teams
 import sqlite3
 def display_menu(stdscr, selected_row):
     stdscr.clear()
@@ -69,7 +70,7 @@ def main(stdscr):
             elif selected_row == 4:
                 select_quiz(stdscr, user_id)
             elif selected_row == 5:
-                print("Ulubione drużyny")
+                handle_favorite_teams(stdscr, user_id)
 
 def initial_screen(stdscr, selected_row):
     stdscr.clear()
@@ -235,6 +236,8 @@ def init_database():
 
     conn.commit()
     conn.close()
+
+
 
 if __name__ == '__main__':
     curses.wrapper(main)
