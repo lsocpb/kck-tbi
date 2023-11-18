@@ -102,10 +102,13 @@ def login(stdscr):
     
     while True:
         key = stdscr.getch()
-        if key == 10:
+        if key == 10:  # Enter key
             break
-        elif key == 127:
+        elif key == 27:  # Escape key
+            return
+        elif key == curses.KEY_BACKSPACE or key == 127:
             username = username[:-1]
+            stdscr.addstr(h // 2 + 1, w // 2 - 10 + len(username), ' ')
         else:
             username += chr(key)
         stdscr.addstr(h // 2 + 1, w // 2 - 10, username)
@@ -129,10 +132,11 @@ def login(stdscr):
             key = stdscr.getch()
             if key == 10:
                 break
-            elif key == 27:
-                return
-            elif key == 127:
+            elif key == curses.KEY_BTAB or key == curses.KEY_UP:
+                break
+            elif key == curses.KEY_BACKSPACE or key == 127:
                 password = password[:-1]
+                stdscr.addstr(h // 2 + 3, w // 2 - 10 + len(password), ' ')
             else:
                 password += chr(key)
             stdscr.addstr(h // 2 + 3, w // 2 - 10, "*" * len(password))
@@ -166,13 +170,13 @@ def register(stdscr):
             break
         elif key == 27:
             return
-        elif key == 127:
+        elif key == curses.KEY_BACKSPACE or key == 127:
             username = username[:-1]
+            stdscr.addstr(h // 2 + 1, w // 2 - 10 + len(username), ' ')
         else:
             username += chr(key)
         stdscr.addstr(h // 2 + 1, w // 2 - 10, username)
         stdscr.refresh()
-
     conn = sqlite3.connect("users.db")
     cursor = conn.cursor()
     cursor.execute('SELECT username FROM users WHERE username = ?', (username,))
@@ -193,8 +197,9 @@ def register(stdscr):
         key = stdscr.getch()
         if key == 10:
             break
-        elif key == 127:
+        elif key == curses.KEY_BACKSPACE or key == 127:
             password = password[:-1]
+            stdscr.addstr(h // 2 + 1, w // 2 - 10 + len(password), ' ')
         else:
             password += chr(key)
         stdscr.addstr(h // 2 + 3, w // 2 - 10, "*" * len(password))
