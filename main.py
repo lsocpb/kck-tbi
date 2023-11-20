@@ -7,7 +7,6 @@ from quiz import select_quiz
 from fav_teams import handle_favorite_teams, get_current_favorite_team
 import sqlite3
 import bcrypt
-
 def display_menu(stdscr, selected_row):
     curses.curs_set(0)
     stdscr.clear()
