@@ -1,17 +1,13 @@
 import curses
 import sqlite3
 
-current_favorite_team = ""
-
-def handle_favorite_teams(stdscr, user_id):
-    global current_favorite_team
+def handle_favorite_teams(stdscr, user_id, current_favorite_team):
+    curses.curs_set(0)
     selected_row_favorite_teams = 0
 
     def update_screen():
-        global current_favorite_team
+        nonlocal current_favorite_team
         current_favorite_team = get_current_favorite_team(user_id)
-
-    update_screen()
 
     while True:
         display_favorite_teams_menu(stdscr, selected_row_favorite_teams, current_favorite_team, update_screen)
@@ -103,29 +99,23 @@ def save_favorite_team(user_id, selected_team):
         conn.close()
 
 def get_current_favorite_team(user_id):
-    global current_favorite_team
+    # Connect to the database
+    conn = sqlite3.connect("users.db")
+    cursor = conn.cursor()
 
-    # Sprawdź, czy wartość current_favorite_team została już ustawiona
-    if not current_favorite_team:
-        # Connect to the database
-        conn = sqlite3.connect("users.db")
-        cursor = conn.cursor()
-
-        try:
-            # Fetch the current favorite team for the user from the database
-            cursor.execute("SELECT favorite_team FROM users WHERE id = ?", (user_id,))
-            result = cursor.fetchone()
-            if result:
-                current_favorite_team = result[0]
-            else:
-                current_favorite_team = "Brak ulubionej drużyny"  # Lub inny komunikat dla braku ulubionej drużyny
-        except sqlite3.Error as e:
-            current_favorite_team = "Błąd pobierania ulubionej drużyny"
-        finally:
-            # Close the database connection
-            conn.close()
-
-    return current_favorite_team
+    try:
+        # Fetch the current favorite team for the user from the database
+        cursor.execute("SELECT favorite_team FROM users WHERE id = ?", (user_id,))
+        result = cursor.fetchone()
+        if result:
+            return result[0]
+        else:
+            return "Brak ulubionej drużyny"  # Lub inny komunikat dla braku ulubionej drużyny
+    except sqlite3.Error as e:
+        return "Błąd pobierania ulubionej drużyny"
+    finally:
+        # Close the database connection
+        conn.close()
 
 
 def display_last_results(stdscr, user_id):
