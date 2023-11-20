@@ -6,6 +6,7 @@ from news import get_selected_news
 from quiz import select_quiz
 from fav_teams import handle_favorite_teams, get_current_favorite_team
 import sqlite3
+import bcrypt
 def display_menu(stdscr, selected_row):
     curses.curs_set(0)
     stdscr.clear()
@@ -102,10 +103,13 @@ def login(stdscr):
     
     while True:
         key = stdscr.getch()
-        if key == 10:
+        if key == 10:  # Enter key
             break
-        elif key == 127:
+        elif key == 27:  # Escape key
+            return
+        elif key == curses.KEY_BACKSPACE or key == 127:
             username = username[:-1]
+            stdscr.addstr(h // 2 + 1, w // 2 - 10 + len(username), ' ')
         else:
             username += chr(key)
         stdscr.addstr(h // 2 + 1, w // 2 - 10, username)
@@ -131,16 +135,16 @@ def login(stdscr):
                 break
             elif key == 27:
                 return
-            elif key == 127:
+            elif key == curses.KEY_BACKSPACE or key == 127:
                 password = password[:-1]
+                stdscr.addstr(h // 2 + 3, w // 2 - 10 + len(password), ' ')
             else:
                 password += chr(key)
             stdscr.addstr(h // 2 + 3, w // 2 - 10, "*" * len(password))
             stdscr.refresh()
 
-        if password == stored_password:
+        if bcrypt.checkpw(password.encode('utf-8'), stored_password):
             return id
-
         else:
             stdscr.addstr(h // 2 + 2, w // 2 - 10, "Nieprawidłowe hasło.", curses.A_BOLD)
             stdscr.refresh()
@@ -167,13 +171,13 @@ def register(stdscr):
             break
         elif key == 27:
             return
-        elif key == 127:
+        elif key == curses.KEY_BACKSPACE or key == 127:
             username = username[:-1]
+            stdscr.addstr(h // 2 + 1, w // 2 - 10 + len(username), ' ')
         else:
             username += chr(key)
         stdscr.addstr(h // 2 + 1, w // 2 - 10, username)
         stdscr.refresh()
-
     conn = sqlite3.connect("users.db")
     cursor = conn.cursor()
     cursor.execute('SELECT username FROM users WHERE username = ?', (username,))
@@ -194,15 +198,18 @@ def register(stdscr):
         key = stdscr.getch()
         if key == 10:
             break
-        elif key == 127:
+        elif key == curses.KEY_BACKSPACE or key == 127:
             password = password[:-1]
+            stdscr.addstr(h // 2 + 1, w // 2 - 10 + len(password), ' ')
         else:
             password += chr(key)
         stdscr.addstr(h // 2 + 3, w // 2 - 10, "*" * len(password))
         stdscr.refresh()
+        salt = bcrypt.gensalt(rounds=15)
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
 
-    # Dodaj nowego użytkownika do bazy danych
-    cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, password))
+
+    cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
     conn.commit()
     conn.close()
 
