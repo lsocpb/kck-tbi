@@ -1,35 +1,36 @@
-import requests
+import curses
+from logic import get_active_matches
+from colors import display_ascii_art
+from ascii import matches_art
 import curses
 
-def get_active_matches():
-    uri = 'https://api.football-data.org/v4/matches'
-    headers = {'X-Auth-Token': '85fb8206e47442b38dfb484ba39522cf'}
-    response = requests.get(uri, headers=headers)
-    data = response.json()
-
-    if 'matches' in data:
-        matches = data['matches']
-        active_matches = []
-
-        for match in matches:
-            if 'status' in match and match['status'] == 'IN_PLAY' and 'competition' in match and 'name' in match['competition'] and match['competition']['name'] in ['Bundesliga', 'Ligue 1', 'Primera Division', 'Premier League', 'Serie A']:
-                home_team_name = match['homeTeam']['name'] if 'homeTeam' in match else 'Nieznany gospodarz'
-                away_team_name = match['awayTeam']['name'] if 'awayTeam' in match else 'Nieznany gość'
-                home_team_score = match['score']['fullTime']['home'] if 'score' in match and 'fullTime' in match['score'] and 'home' in match['score']['fullTime'] else '?'
-                away_team_score = match['score']['fullTime']['away'] if 'score' in match and 'fullTime' in match['score'] and 'away' in match['score']['fullTime'] else '?'
-                competition_name = match['competition']['name']
-                formatted_match = f"{home_team_name} {home_team_score} - {away_team_score} {away_team_name} ({competition_name})"
-                active_matches.append(formatted_match)
-
-        return active_matches
-    return []
-
-
-
-def display_matches(stdscr, matches):
+def display_matches(stdscr):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
-    
+
+    display_ascii_art(stdscr, matches_art, color_pair=6, vertical_offset=7)
+
+    stdscr.addstr(h // 2, w // 2 - 10, "Ładowanie danych...", curses.A_BOLD)
+    stdscr.refresh()
+
+    stdscr.timeout(1000)
+
+    try:
+        matches = get_active_matches()
+    except Exception as e:
+        stdscr.clear()
+        stdscr.addstr(h // 2, w // 2 - len(str(e)) // 2, str(e), curses.A_BOLD)
+        stdscr.refresh()
+        stdscr.getch()
+        return
+
+    stdscr.timeout(-1)
+
+    stdscr.clear()
+    h, w = stdscr.getmaxyx()
+
+    display_ascii_art(stdscr, matches_art, color_pair=6, vertical_offset=7)
+
     if not matches:
         stdscr.addstr(h // 2, w // 2 - 15, "Brak aktywnych meczów.", curses.A_BOLD)
     else:
@@ -40,5 +41,7 @@ def display_matches(stdscr, matches):
             stdscr.addstr(y, x, match)
             y += 1
 
+    stdscr.addstr(h - 2, 4, "Naciśnij dowolny klawisz, aby powrócić do menu", curses.A_BOLD)
     stdscr.refresh()
     stdscr.getch()
+

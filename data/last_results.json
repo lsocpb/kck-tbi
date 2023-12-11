@@ -1,0 +1,439 @@
+{
+    "teams":{
+       "FC BARCELONA":{
+          "results":[
+             {
+                "opponent":"Alaves",
+                "score":"100-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Szachtar",
+                "score":"100-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Real Sociedad",
+                "score":"100-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Real Madrid",
+                "score":"1500-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Atlethico Bilbao",
+                "score":"100-0",
+                "outcome":"WINNER"
+             }
+          ]
+       },
+       "REAL MADRYT":{
+          "results":[
+             {
+                "opponent":"Valencia",
+                "score":"5-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Braga",
+                "score":"3-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Vallecano",
+                "score":"0-0",
+                "outcome":"DRAW"
+             },
+             {
+                "opponent":"FC Barcelona",
+                "score":"2-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Sevilla",
+                "score":"1-1",
+                "outcome":"DRAW"
+             }
+          ]
+       },
+       "BAYERN MONACHIUM":{
+          "results":[
+             {
+                "opponent":"Heidenheim",
+                "score":"4-2",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Galatasaray",
+                "score":"2-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Borussia Dortmund",
+                "score":"4-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Saarbrucken",
+                "score":"2-1",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Darmstadt",
+                "score":"8-0",
+                "outcome":"WINNER"
+             }
+          ]
+       },
+       "MANCHESTER UNITED":{
+          "results":[
+             {
+                "opponent":"Luton",
+                "score":"1-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"FC Kopenhaga",
+                "score":"3-4",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Fullham",
+                "score":"1-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Newcastle",
+                "score":"0-3",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Manchester City",
+                "score":"0-3",
+                "outcome":"LOSER"
+             }
+          ]
+       },
+       "MANCHESTER CITY":{
+          "results":[
+             {
+                "opponent":"Chelsea FC",
+                "score":"4-4",
+                "outcome":"DRAW"
+             },
+             {
+                "opponent":"Young Boys",
+                "score":"3-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Bournemouth",
+                "score":"6-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Manchester United",
+                "score":"3-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Young Boys",
+                "score":"3-1",
+                "outcome":"WINNER"
+             }
+          ]
+       },
+       "CHELSEA FC":{
+          "results":[
+             {
+                "opponent":"Manchester City",
+                "score":"4-4",
+                "outcome":"DRAW"
+             },
+             {
+                "opponent":"Tottenham Hotspur",
+                "score":"4-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Blackburn",
+                "score":"2-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Brentford",
+                "score":"0-2",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Arsenal FC",
+                "score":"2-2",
+                "outcome":"DRAW"
+             }
+          ]
+       },
+       "BORUSSIA DORTMUND":{
+          "results":[
+             {
+                "opponent":"Vfb Stuttgart",
+                "score":"2-1",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Newcastle",
+                "score":"2-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Bayern Monachium",
+                "score":"0-4",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"TSG Hoffenheim",
+                "score":"1-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Eintracht Frankfurt",
+                "score":"3-3",
+                "outcome":"DRAW"
+             }
+          ]
+       },
+       "AC MILAN":{
+          "results":[
+             {
+                "opponent":"Lecce",
+                "score":"2-2",
+                "outcome":"DRAW"
+             },
+             {
+                "opponent":"Paris Saint-Germain",
+                "score":"2-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Udinese",
+                "score":"0-1",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Napoli",
+                "score":"2-2",
+                "outcome":"DRAW"
+             },
+             {
+                "opponent":"Paris Saint-Germain",
+                "score":"0-3",
+                "outcome":"LOSER"
+             }
+          ]
+       },
+       "INTER MEDIOLAN":{
+          "results":[
+             {
+                "opponent":"Frosinone",
+                "score":"2-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Salzburg",
+                "score":"1-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Atalanta",
+                "score":"2-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"AS Roma",
+                "score":"1-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Salzburg",
+                "score":"2-1",
+                "outcome":"WINNER"
+             }
+          ]
+       },
+       "JUVENTUS TURYN":{
+          "results":[
+             {
+                "opponent":"Cagliari",
+                "score":"2-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Fiorentina",
+                "score":"1-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Verona",
+                "score":"1-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Torino",
+                "score":"2-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Atlanta",
+                "score":"0-0",
+                "outcome":"DRAW"
+             }
+          ]
+       },
+       "PARIS SAINT-GERMAIN":{
+          "results":[
+             {
+                "opponent":"Reims",
+                "score":"0-3",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"AC Milan",
+                "score":"1-2",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Montpellier",
+                "score":"3-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Brest",
+                "score":"2-3",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"AC Milan",
+                "score":"3-0",
+                "outcome":"WINNER"
+             }
+          ]
+       },
+       "LIVERPOOL FC":{
+          "results":[
+             {
+                "opponent":"Brentford",
+                "score":"3-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Toulouse",
+                "score":"2-3",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Luton",
+                "score":"1-1",
+                "outcome":"DRAW"
+             },
+             {
+                "opponent":"Bournemouth",
+                "score":"2-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Nottinggham",
+                "score":"3-0",
+                "outcome":"WINNER"
+             }
+          ]
+       },
+       "ARSENAL FC":{
+          "results":[
+             {
+                "opponent":"Burnley",
+                "score":"3-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Sevilla",
+                "score":"2-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Newcastle",
+                "score":"0-1",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"West Ham",
+                "score":"3-1",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Sheffield United",
+                "score":"5-0",
+                "outcome":"WINNER"
+             }
+          ]
+       },
+       "TOTTENHAM HOTSPUR":{
+          "results":[
+             {
+                "opponent":"Wolves",
+                "score":"1-2",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Chelsea FC",
+                "score":"1-4",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Crystal Palace",
+                "score":"2-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Fullham",
+                "score":"2-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Luton",
+                "score":"1-0",
+                "outcome":"WINNER"
+             }
+          ]
+       },
+       "ATLETICO MADRYT":{
+          "results":[
+             {
+                "opponent":"Villarreal",
+                "score":"3-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Celtic",
+                "score":"6-0",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Las Palmas",
+                "score":"1-2",
+                "outcome":"LOSER"
+             },
+             {
+                "opponent":"Alaves",
+                "score":"2-1",
+                "outcome":"WINNER"
+             },
+             {
+                "opponent":"Celtic",
+                "score":"2-2",
+                "outcome":"DRAW"
+             }
+          ]
+       }
+    }
+ }

@@ -1,0 +1,37 @@
+[
+    {
+        "Nazwa ligi": "English Premier League",
+        "Kraj": "Anglia",
+        "Rok założenia": 1992,
+        "Liczba drużyn": 20,
+        "Najpopularniejszy klub": "Manchester United"
+    },
+    {
+        "Nazwa ligi": "La Liga",
+        "Kraj": "Hiszpania",
+        "Rok założenia": 1929,
+        "Liczba drużyn": 20,
+        "Najpopularniejszy klub": "Real Madrid"
+    },
+    {
+        "Nazwa ligi": "Serie A",
+        "Kraj": "Włochy",
+        "Rok założenia": 1898,
+        "Liczba drużyn": 20,
+        "Najpopularniejszy klub": "Juventus"
+    },
+    {
+        "Nazwa ligi": "Bundesliga",
+        "Kraj": "Niemcy",
+        "Rok założenia": 1963,
+        "Liczba drużyn": 18,
+        "Najpopularniejszy klub": "Bayern Monachium"
+    },
+    {
+        "Nazwa ligi": "Ligue 1",
+        "Kraj": "Francja",
+        "Rok założenia": 1932,
+        "Liczba drużyn": 20,
+        "Najpopularniejszy klub": "Paris Saint-Germain"
+    }
+]

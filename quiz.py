@@ -1,29 +1,18 @@
 import curses
-import json
-import random
-import sqlite3
-def load_quiz_from_file(file_path):
-    try:
-        with open(file_path, "r") as file:
-            return json.load(file)
-    except FileNotFoundError:
-        return []
-
-# Piliki json z pytaniami i odpowiedziami do quizow
-general_quiz_file = "data/general_quiz.json"
-specialized_quiz_file = "data/specialized_quiz.json"
-general_quiz_questions = load_quiz_from_file(general_quiz_file)
-specialized_quiz_questions = load_quiz_from_file(specialized_quiz_file)
+from logic import save_quiz_results_to_db, read_quiz_results_from_db, get_specialized_quiz_questions, get_general_quiz_questions
+from ascii import quiz_art
+from colors import display_ascii_art
 
 def run_general_quiz(stdscr, user_id):
-    random_questions = random.sample(general_quiz_questions, 5)
-    run_quiz(stdscr, "Quiz Ogólny", random_questions, user_id)
+    quiz_name = "Quiz Ogólny"
+    quiz_questions = get_general_quiz_questions()
+    run_quiz(stdscr, quiz_name, quiz_questions, user_id)
 
 def run_specialized_quiz(stdscr, user_id):
-    random_questions = random.sample(specialized_quiz_questions, 5)
-    run_quiz(stdscr, "Quiz Specjalistyczny", random_questions, user_id)
+    quiz_name = "Quiz Specjalistyczny"
+    quiz_questions = get_specialized_quiz_questions()
+    run_quiz(stdscr, quiz_name, quiz_questions, user_id)
 
-# Funkcja ogólna do uruchamiania quizów
 def run_quiz(stdscr, quiz_name, quiz_questions, user_id):
     selected_question = 0
     score = 0
@@ -31,18 +20,16 @@ def run_quiz(stdscr, quiz_name, quiz_questions, user_id):
     while selected_question < len(quiz_questions):
         stdscr.clear()
         h, w = stdscr.getmaxyx()
-
-        # Wyswietlamy pytanie
         question = quiz_questions[selected_question]
         stdscr.addstr(2, 2, f"Pytanie {selected_question + 1}/{len(quiz_questions)} ({quiz_name}):")
         stdscr.addstr(4, 2, question["Pytanie"])
 
-        # Wyswietlamy odpowiedzi
         for i, answer in enumerate(question["Odpowiedzi"]):
             stdscr.addstr(6 + i, 4, answer)
 
+        stdscr.addstr(h - 2, 2, "Wybierz odpowiedź (A, B, C lub D) spośród klawiszy na klawiaturze:")
+
         stdscr.refresh()
-        # Pobieramy odpowiedz od użytkownika
         key = stdscr.getch()
         if key == ord("A") or key == ord("a") or key == ord("B") or key == ord("b") or key == ord("C") or key == ord("c") or key == ord("D") or key == ord("d"):
             selected_answer = chr(key).upper()
@@ -50,24 +37,14 @@ def run_quiz(stdscr, quiz_name, quiz_questions, user_id):
             if selected_answer == correct_answer:
                 score += 1
             selected_question += 1
-    
-    conn = sqlite3.connect("users.db")
-    cursor = conn.cursor()
-    cursor.execute('SELECT id FROM users WHERE id = ?', (user_id,))
-    user = cursor.fetchone()
-    
-    if user is not None:
-        cursor.execute('INSERT INTO quiz_results (user_id, quiz_name, score) VALUES (?, ?, ?)', (user_id, quiz_name, score))
-        conn.commit()
-    conn.close()
 
-    # Wyświetl wynik
+    save_quiz_results_to_db(user_id, quiz_name, score)
+
     stdscr.clear()
     stdscr.addstr(h // 2, w // 2 - 10, f"Twój wynik ({quiz_name}): {score}/{len(quiz_questions)}", curses.A_BOLD)
     stdscr.refresh()
     stdscr.getch()
 
-# Funkcja wybierająca quiz
 def select_quiz(stdscr, user_id):
     curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
@@ -79,6 +56,8 @@ def select_quiz(stdscr, user_id):
         stdscr.clear()
         h, w = stdscr.getmaxyx()
 
+        display_ascii_art(stdscr, quiz_art, color_pair = 5, vertical_offset=7)
+        
         for idx, row in enumerate(menu):
             x = w // 2 - len(row) // 2
             y = h // 2 - len(menu) // 2 + idx
@@ -113,12 +92,12 @@ def display_quiz_results(stdscr, user_id):
     h, w = stdscr.getmaxyx()
     stdscr.addstr(2, 2, "Ostatnie 5 wyników quizów:")
 
-    with sqlite3.connect("users.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute('SELECT quiz_name, score FROM quiz_results WHERE user_id = ? ORDER BY id DESC LIMIT 5', (user_id,))
-        quiz_results = cursor.fetchall()
+    quiz_results = read_quiz_results_from_db(user_id)
 
-    for i, result in enumerate(quiz_results):
+    start_index = max(0, len(quiz_results) - 5)
+    recent_results = quiz_results[start_index:]
+
+    for i, result in enumerate(recent_results):
         quiz_name, score = result
         stdscr.addstr(4 + i, 4, f"{quiz_name}: {score}/5")
 
@@ -131,8 +110,6 @@ def display_quiz_results(stdscr, user_id):
             break
 
 
-
 if __name__ == "__main__":
     id = None
     curses.wrapper(lambda stdscr: select_quiz(stdscr, id))
-

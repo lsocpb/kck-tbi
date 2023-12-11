@@ -52,12 +52,12 @@
     {
         "Pytanie": "Ile zawodników ma drużyna w piłce nożnej na boisku podczas meczu?",
         "Odpowiedzi": ["A. 7", "B. 11", "C. 6", "D. 9"],
-        "Poprawna odpowiedź": "A"
+        "Poprawna odpowiedź": "B"
     },
     {
         "Pytanie": "Kto zdobył najwięcej bramek w jednym sezonie La Liga?",
         "Odpowiedzi": ["A. Lionel Messi", "B. Cristiano Ronaldo", "C. Hugo Sánchez", "D. Raúl"],
-        "Poprawna odpowiedź": "C"
+        "Poprawna odpowiedź": "A"
     },
     {
         "Pytanie": "Która drużyna wygrała najwięcej Pucharów Europy (obecnie Liga Mistrzów)?",
@@ -86,12 +86,12 @@
     },
     {
         "Pytanie": "Który klub jest znany jako 'Koguty'?",
-        "Odpowiedzi": ["A. Chelsea", "B. Liverpool", "C. AS Roma", "D. Borussia Dortmund"],
+        "Odpowiedzi": ["A. Totenham", "B. Liverpool", "C. AS Roma", "D. Borussia Dortmund"],
         "Poprawna odpowiedź": "A"
     },
     {
         "Pytanie": "Który piłkarz jest autorem rekordowej liczby strzelonych bramek w jednym sezonie Premier League?",
         "Odpowiedzi": ["A. Alan Shearer", "B. Thierry Henry", "C. Cristiano Ronaldo", "D. Andy Cole"],
-        "Poprawna odpowiedź": "C"
+        "Poprawna odpowiedź": "B"
     }
 ]
