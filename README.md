@@ -12,10 +12,10 @@ pip install -r requirements.txt
 
 Use the terminal and clone the project
 ```bash
-git clone https://github.com/lsocpb/kck2.git
+git clone https://github.com/lsocpb/kck-tbi.git
 ```
 
-Then run in terminal
+Then run in the terminal
 ```bash
 cd kck2
 python3 main.py
